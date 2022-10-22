@@ -10,11 +10,11 @@ import (
 )
 
 func RegisterBlogRoutes(router *mux.Router) {
-	router.HandleFunc("api/blogs", controller.GetPosts).Methods("GET")
-	router.HandleFunc("api/blogs/{id}", controller.GetPostById).Methods("GET")
-	router.HandleFunc("api/blogs", controller.CreatePost).Methods("POST")
-	router.HandleFunc("api/blogs/{id}", controller.UpdatePost).Methods("PUT")
-	router.HandleFunc("api/blogs/{id}", controller.DeletePost).Methods("DELETE")
+	router.HandleFunc("/api/posts", controller.GetPosts).Methods("GET")
+	router.HandleFunc("/api/posts/{id}", controller.GetPostById).Methods("GET")
+	router.HandleFunc("/api/posts", controller.CreatePost).Methods("POST")
+	router.HandleFunc("/api/posts/{id}", controller.UpdatePost).Methods("PUT")
+	router.HandleFunc("/api/posts/{id}", controller.DeletePost).Methods("DELETE")
 }
 
 func main() {

@@ -97,6 +97,7 @@ func UpdatePost(w http.ResponseWriter, r *http.Request) {
 
 	// set response
 	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode("Post Updates")
 	w.WriteHeader(http.StatusOK)
 }
 
