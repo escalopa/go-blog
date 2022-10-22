@@ -1,0 +1,2 @@
+port: 8080
+connection_string: "postgres://localhost:5432/blog"
