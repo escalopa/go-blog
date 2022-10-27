@@ -1,2 +1,2 @@
 port: 8080
-connection_string: ${PRODUCTION_DB_URL:"postgres://pg:pass@localhost:5432/blog"}
+connection_string: "postgres://pg:pass@localhost:5432/blog"
