@@ -10,8 +10,8 @@ import (
 var Instance *gorm.DB
 var err error
 
-func Connect(connection_string string) {
-	Instance, err = gorm.Open(postgres.Open(connection_string), &gorm.Config{})
+func Connect(connectionString string) {
+	Instance, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to open db")
 	}

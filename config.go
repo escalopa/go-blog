@@ -7,7 +7,7 @@ import (
 
 type Config struct {
 	Port             string `mapstructure:"port"`
-	ConnectionString string `mapstructure:"connection_string"`
+	ConnectionString string `mapstructure:"db_connection_string"`
 }
 
 var AppConfig Config
@@ -22,6 +22,7 @@ func LoadConfiguration() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	_ = viper.BindEnv("db_connection_string", "db_connection_string")
 	err = viper.Unmarshal(&AppConfig)
 	if err != nil {
 		log.Fatal(err)
