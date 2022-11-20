@@ -1,4 +1,4 @@
-module github.com/escalopa/goblog
+module github.com/escalopa/go-blog
 
 go 1.19
 
