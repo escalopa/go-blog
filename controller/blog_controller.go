@@ -2,8 +2,8 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/escalopa/go-blog/database"
-	"github.com/escalopa/go-blog/entities"
+	"github.com/escalopa/goblog/database"
+	"github.com/escalopa/goblog/entities"
 	"github.com/gorilla/mux"
 	"net/http"
 )

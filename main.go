@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/escalopa/go-blog/controller"
-	"github.com/escalopa/go-blog/database"
+	"github.com/escalopa/goblog/controller"
+	"github.com/escalopa/goblog/database"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"

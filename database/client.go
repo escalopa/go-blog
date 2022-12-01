@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/escalopa/go-blog/entities"
+	"github.com/escalopa/goblog/entities"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
