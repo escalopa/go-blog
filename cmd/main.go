@@ -1,12 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/escalopa/goblog/config"
 	"github.com/escalopa/goblog/controller"
 	"github.com/escalopa/goblog/database"
 	"github.com/gorilla/mux"
-	"log"
-	"net/http"
 )
 
 func RegisterBlogRoutes(router *mux.Router) {
@@ -18,13 +19,13 @@ func RegisterBlogRoutes(router *mux.Router) {
 }
 
 func main() {
-	LoadConfiguration()
-	database.Connect(AppConfig.ConnectionString)
+	config := config.New()
+	database.Connect(config.Get("DATABASE_URL"))
 	database.Migrate()
 
 	router := mux.NewRouter().StrictSlash(true)
 	RegisterBlogRoutes(router)
 
-	log.Println(fmt.Sprintf("Server up and running on port %s", AppConfig.Port))
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", AppConfig.Port), router))
+	log.Print("Server up and running on port 8000")
+	log.Fatal(http.ListenAndServe(":8000", router))
 }

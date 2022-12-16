@@ -1,2 +1,0 @@
-port: 8080
-db_connection_string: "postgres://pg:pass@localhost:5432/blog"

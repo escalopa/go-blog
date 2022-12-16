@@ -1,18 +1,36 @@
 version: "3.8"
 
 services:
-  database:
-    container_name: database
+  db:
+    container_name: "goblog-db"
     image: postgres:12.8
     restart: always
-    environment:
-      - POSTGRES_USER=pg
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=blog
+    env_file:
+      - ./.db.env
     ports:
       - "5432:5432"
     volumes:
       - db:/var/lib/postgresql/data
-
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  api:
+    container_name: "goblog-api"
+    volumes:
+      - .:/go/src/github.com/escalopa/goblog
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+  
 volumes:
-  db:
+  db:     
