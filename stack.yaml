@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+    server:
+          image: escalopa/goblog-server:0.1
+          secrets:
+                  - goblog_database_url
+          environment:
+                  - DATABASE_URL_FILE=/run/secrets/goblog_database_url
+          deploy:
+                  restart_policy:
+                          condition: on-failure
+          ports:
+                  - "9001:8000"
+          extra_hosts:
+                  - "host.docker.internal:host-gateway"
+secrets:
+        goblog_database_url:
+                external: true
