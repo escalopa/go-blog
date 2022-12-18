@@ -29,7 +29,7 @@ cp .db.env.example .db.env
 Run the following command to start the application.
 
 ```bash
-docker-compose up 
+docker compose up 
 ```
 
 Then navigate to [Local Instance](http://localhost:9000/docs/index.html) to see the API in action.
