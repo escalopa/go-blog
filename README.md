@@ -26,6 +26,8 @@ cp .env.example .env
 cp .db.env.example .db.env
 ```
 
+Run the following command to start the application.
+
 ```bash
 docker-compose up 
 ```
