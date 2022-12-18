@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/escalopa/goblog/database"
@@ -49,11 +50,8 @@ func GetPostById(w http.ResponseWriter, r *http.Request) {
 	// check if post exists
 	postId := mux.Vars(r)["id"]
 	if !isPostExists(postId) {
-		err := json.NewEncoder(w).Encode("Post Not Found")
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
+		handleNotFound(w, r)
+		return
 	}
 
 	// fetch `post` from `db`
@@ -85,7 +83,7 @@ type PostRequestParam struct {
 	Description string `json:"description"`
 }
 
-// ShowAccount godoc
+// CreatePost godoc
 // @Summary      Create a Post
 // @Description  create a post with title, content and description
 // @Tags         posts
@@ -98,12 +96,10 @@ type PostRequestParam struct {
 // @Failure      500  {object}	string
 // @Router       /posts/ [post]
 func CreatePost(w http.ResponseWriter, r *http.Request) {
-	// parse post
-	var req PostRequestParam
-	var err error
-	err = json.NewDecoder(r.Body).Decode(&req)
+	req, err := parsePostBody(r)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err.Error())
 		return
 	}
 
@@ -127,7 +123,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 }
 
-// ShowAccount godoc
+// UpdatePost godoc
 // @Summary      update one Post
 // @Description  update post by id with title, content and description
 // @Tags         posts
@@ -142,22 +138,17 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 // @Router       /posts/{id} [put]
 func UpdatePost(w http.ResponseWriter, r *http.Request) {
 	// check if post exists
-	var postId = mux.Vars(r)["id"]
+	postId := parseReqParamID(r)
 	if !isPostExists(postId) {
-		w.WriteHeader(http.StatusBadRequest)
-		err := json.NewEncoder(w).Encode("Post Not Found")
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
+		handleNotFound(w, r)
 		return
 	}
 
 	// read request body
-	var req PostRequestParam
-	err := json.NewDecoder(r.Body).Decode(&req)
+	req, err := parsePostBody(r)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err.Error())
 		return
 	}
 
@@ -169,10 +160,10 @@ func UpdatePost(w http.ResponseWriter, r *http.Request) {
 
 	// set response
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode("Post Updates")
+	json.NewEncoder(w).Encode("Post Updated")
 }
 
-// ShowAccount godoc
+// DeletePost godoc
 // @Summary      Delete one Post
 // @Description  delete post by id
 // @Tags         posts
@@ -187,12 +178,7 @@ func UpdatePost(w http.ResponseWriter, r *http.Request) {
 func DeletePost(w http.ResponseWriter, r *http.Request) {
 	var postId = mux.Vars(r)["id"]
 	if !isPostExists(postId) {
-		w.WriteHeader(http.StatusBadRequest)
-		err := json.NewEncoder(w).Encode("Post Not Found")
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
+		handleNotFound(w, r)
 		return
 	}
 	database.Instance.Delete(&entities.Post{}, postId)
@@ -214,4 +200,32 @@ func mapRequestToPost(req PostRequestParam, post *entities.Post) {
 	post.Title = req.Title
 	post.Content = req.Content
 	post.Description = req.Description
+}
+
+func parsePostBody(r *http.Request) (PostRequestParam, error) {
+	var req PostRequestParam
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		return req, err
+	}
+
+	if req.Title == "" || req.Content == "" || req.Description == "" {
+		return req, errors.New("invalid request, title, content and description are required")
+	}
+
+	return req, nil
+}
+
+func parseReqParamID(r *http.Request) string {
+	var postId = mux.Vars(r)["id"]
+	return postId
+}
+
+func handleNotFound(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+	err := json.NewEncoder(w).Encode("Post Not Found")
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 }

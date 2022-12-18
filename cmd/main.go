@@ -53,10 +53,5 @@ func RegisterSwaggerRoutes(router *mux.Router) {
 		docs.SwaggerInfo.BasePath = "/api"
 	}
 
-	prefix := os.Getenv("SWAGGER_PREFIX")
-	if prefix == "" {
-		prefix = "/swagger/"
-	}
-
-	router.PathPrefix(prefix).Handler(httpSwagger.WrapHandler)
+	router.PathPrefix("/docs/").Handler(httpSwagger.WrapHandler)
 }
