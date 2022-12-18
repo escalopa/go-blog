@@ -27,7 +27,7 @@ info:
   contact:
     email: ahmad.helay.dev@gmail.com
     name: Ahmad Helaly
-  description: This is a simple blog CRUD server.
+  description: This is a simple `http mux` blog **CRUD** server.
   license:
     name: Apache 2.0
   title: GoBlog API

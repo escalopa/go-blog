@@ -317,7 +317,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "GoBlog API",
-	Description:      "This is a simple blog CRUD server.",
+	Description:      "This is a simple `http mux` blog **CRUD** server.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

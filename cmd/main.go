@@ -16,7 +16,7 @@ import (
 
 // @title           GoBlog API
 // @version         1.0
-// @description     This is a simple blog CRUD server.
+// @description     This is a simple `http mux` blog **CRUD** server.
 
 // @contact.email ahmad.helay.dev@gmail.com
 // @contact.name   Ahmad Helaly
