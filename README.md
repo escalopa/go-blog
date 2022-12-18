@@ -19,7 +19,12 @@ The application is deployed on heroku. You can access the API at [GoBlog Remote 
 
 2. Local Instance
 
-To run the local instance, you need to have docker-compose installed on your machine.
+To run the local instance, you first have to set up the env vars, You can use the default ones in the `.*.env.example`.
+
+```bash
+cp .env.example .env
+cp .db.env.example .db.env
+```
 
 ```bash
 docker-compose up 
