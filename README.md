@@ -13,11 +13,11 @@ This repo is a pure practice for go principlies to improve my skills.
 
 ## API Usage
 
-1. Remote Instance
+### Remote Instance
 
 The application is deployed on heroku. You can access the API at [GoBlog Remote Server](http://37.46.128.188/goblog/docs/index.html)
 
-2. Local Instance
+### Local Instance
 
 To run the local instance, you first have to set up the env vars, You can use the default ones in the `.*.env.example`.
 
