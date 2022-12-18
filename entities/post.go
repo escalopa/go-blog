@@ -7,6 +7,6 @@ type Post struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Content     string    `json:"content"`
-	CreateAt    time.Time `json:"create-at"`
+	CreatedAt   time.Time `json:"created-at"`
 	UpdatedAt   time.Time `json:"updated-at"`
 }

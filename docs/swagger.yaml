@@ -1,0 +1,200 @@
+basePath: /api/
+definitions:
+  controller.PostRequestParam:
+    properties:
+      content:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  entities.Post:
+    properties:
+      content:
+        type: string
+      created-at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated-at:
+        type: string
+    type: object
+host: localhost:9000
+info:
+  contact:
+    name: API Support
+  description: This is a simple blog CRUD server.
+  license:
+    name: Apache 2.0
+  title: GoBlog API
+  version: "1.0"
+paths:
+  /posts/:
+    get:
+      description: get all posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Post'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Show all Posts
+      tags:
+      - posts
+    post:
+      consumes:
+      - application/json
+      description: create a post with title, content and description
+      parameters:
+      - description: Post Param
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/controller.PostRequestParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Post'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create a Post
+      tags:
+      - posts
+  /posts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete post by id
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete one Post
+      tags:
+      - posts
+    get:
+      consumes:
+      - application/json
+      description: get post by id
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Post'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Show one Post
+      tags:
+      - posts
+    put:
+      consumes:
+      - application/json
+      description: update post by id with title, content and description
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Post Param
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/controller.PostRequestParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Post'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: update one Post
+      tags:
+      - posts
+swagger: "2.0"

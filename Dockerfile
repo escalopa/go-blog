@@ -1,8 +1,7 @@
 FROM golang:1.19 AS development
 WORKDIR /go/src/github.com/escalopa/goblog
-COPY go.mod go.sum ./
-RUN go mod download
 COPY . .
+RUN go mod download
 RUN go install github.com/cespare/reflex@latest
 CMD reflex -sr '\.go$' go run ./cmd/main.go
 
