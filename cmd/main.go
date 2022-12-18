@@ -18,7 +18,8 @@ import (
 // @version         1.0
 // @description     This is a simple blog CRUD server.
 
-// @contact.name   API Support
+// @contact.name   Ahmad Helaly
+// @contact.email ahmad.helay.dev@gmail.com
 
 // @license.name  Apache 2.0
 func main() {

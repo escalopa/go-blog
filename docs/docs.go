@@ -11,7 +11,8 @@ const docTemplate = `{
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
         "contact": {
-            "name": "API Support"
+            "name": "Ahmad Helaly",
+            "email": "ahmad.helay.dev@gmail.com"
         },
         "license": {
             "name": "Apache 2.0"

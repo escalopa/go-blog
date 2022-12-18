@@ -25,7 +25,8 @@ definitions:
     type: object
 info:
   contact:
-    name: API Support
+    email: ahmad.helay.dev@gmail.com
+    name: Ahmad Helaly
   description: This is a simple blog CRUD server.
   license:
     name: Apache 2.0
