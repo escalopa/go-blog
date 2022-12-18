@@ -1,4 +1,3 @@
-basePath: /api/
 definitions:
   controller.PostRequestParam:
     properties:
@@ -24,7 +23,6 @@ definitions:
       updated-at:
         type: string
     type: object
-host: localhost:9000
 info:
   contact:
     name: API Support

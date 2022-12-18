@@ -9,7 +9,6 @@ import (
 	"github.com/escalopa/goblog/controller"
 	"github.com/escalopa/goblog/database"
 	"github.com/escalopa/goblog/docs"
-	_ "github.com/escalopa/goblog/docs"
 	"github.com/gorilla/mux"
 
 	httpSwagger "github.com/swaggo/http-swagger"
